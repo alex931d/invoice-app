@@ -34,24 +34,6 @@ app.use(
 );
 
 app.use(helmet());
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'", "https://invoiceapp-46lb.onrender.com"],
-      scriptSrc: [
-        "'self'",
-        "https://invoiceapp-46lb.onrender.com",
-        "'unsafe-inline'",
-      ],
-      styleSrc: [
-        "'self'",
-        "https://invoiceapp-46lb.onrender.com",
-        "'unsafe-inline'",
-      ],
-      imgSrc: ["'self'", "https://invoiceapp-46lb.onrender.com", "blob:"],
-    },
-  })
-);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
