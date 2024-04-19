@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { IUser, User } from "../models/schema";
 import jwt, { VerifyErrors, VerifyOptions } from "jsonwebtoken";
 
-const secretKey = "1a3f7d9e2c5h8k0o3w6s9v2b4x7z1q3u5t8m0l2n";
+const secretKey = process.env.SECRET_KEY;
 
 function verifyToken(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies.jwt;
@@ -10,7 +10,9 @@ function verifyToken(req: Request, res: Response, next: NextFunction) {
   if (!token) {
     return res.status(401).json({ success: false, message: "Unauthorized" });
   }
-
+  if (!secretKey) {
+    return res.status(401).json({ success: false, message: "no secretKey" });
+  }
   jwt.verify(token, secretKey, (err: VerifyErrors | null, decoded: unknown) => {
     if (err) {
       return res
