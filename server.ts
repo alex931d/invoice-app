@@ -40,17 +40,15 @@ app.use(
       defaultSrc: ["'self'", "https://invoiceapp-46lb.onrender.com"],
       scriptSrc: [
         "'self'",
-        ,
         "https://invoiceapp-46lb.onrender.com",
         "'unsafe-inline'",
       ],
       styleSrc: [
         "'self'",
-        ,
         "https://invoiceapp-46lb.onrender.com",
         "'unsafe-inline'",
       ],
-      imgSrc: ["'self'", , "https://invoiceapp-46lb.onrender.com", "blob:"],
+      imgSrc: ["'self'", "https://invoiceapp-46lb.onrender.com", "blob:"],
     },
   })
 );
