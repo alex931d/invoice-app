@@ -52,20 +52,6 @@ app.use(
     },
   })
 );
-app.use(helmet.crossOriginEmbedderPolicy({ policy: "require-corp" }));
-
-app.use(helmet.crossOriginOpenerPolicy({ policy: "same-origin" }));
-app.use((req, res, next) => {
-  res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
-  next();
-});
-app.use(
-  helmet({
-    referrerPolicy: {
-      policy: "strict-origin-when-cross-origin",
-    },
-  })
-);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
