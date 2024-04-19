@@ -298,6 +298,9 @@ accountAPI.post("/signup", async (req, res) => {
       owner: newUser._id,
     });
     await project.save();
+
+    newUser.projects.push(project._id);
+    await newUser.save();
     const projects = await Project.find({ _id: { $in: newUser.projects } })
       .populate({
         path: "invoices",
@@ -308,8 +311,6 @@ accountAPI.post("/signup", async (req, res) => {
     if (!projects) {
       return res.status(500).json({ error: "no projects found" });
     }
-    newUser.projects.push(project._id);
-    await newUser.save();
     const token = jwt.sign(
       {
         user: {
