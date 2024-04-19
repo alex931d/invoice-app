@@ -208,7 +208,7 @@ accountAPI.put("/updateUser", upload.single("file"), async (req, res) => {
         });
 
         uploadStream.on("finish", async () => {
-          const imageUrl = `https://invoiceapp-46lb.onrender.com/images/${randomFilename}`;
+          const imageUrl = `https://invoice-app-3qvk.onrender.com/images/${randomFilename}`;
           const image = new ImageModel({
             filename: randomFilename,
             contentType: file.mimetype,
