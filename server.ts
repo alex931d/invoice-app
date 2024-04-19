@@ -28,12 +28,22 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://invoiceappfrontend.onrender.com",
+    origin: "https://invoice-app-3qvk.onrender.com",
     credentials: true,
   })
 );
 
 app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "blob:"],
+    },
+  })
+);
 app.use(helmet.crossOriginEmbedderPolicy({ policy: "require-corp" }));
 
 app.use(helmet.crossOriginOpenerPolicy({ policy: "same-origin" }));
