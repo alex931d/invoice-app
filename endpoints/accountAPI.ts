@@ -232,7 +232,7 @@ accountAPI.put("/updateUser", upload.single("file"), async (req, res) => {
             { email: user.email, avatar: imageUrl },
             { new: true }
           )
-            .then((updatedUser) => {
+            .then((updatedUser: IUser) => {
               if (!updatedUser) {
                 return res
                   .status(404)
