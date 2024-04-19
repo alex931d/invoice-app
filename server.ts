@@ -37,10 +37,20 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "blob:"],
+      defaultSrc: ["'self'", "https://invoiceapp-46lb.onrender.com"],
+      scriptSrc: [
+        "'self'",
+        ,
+        "https://invoiceapp-46lb.onrender.com",
+        "'unsafe-inline'",
+      ],
+      styleSrc: [
+        "'self'",
+        ,
+        "https://invoiceapp-46lb.onrender.com",
+        "'unsafe-inline'",
+      ],
+      imgSrc: ["'self'", , "https://invoiceapp-46lb.onrender.com", "blob:"],
     },
   })
 );
