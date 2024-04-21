@@ -43,6 +43,7 @@ enum Status {
   paid,
   draft,
   pending,
+  overDue,
 }
 enum Filter {
   Name,
