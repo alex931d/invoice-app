@@ -172,7 +172,7 @@ accountAPI.put("/updateUser", upload.single("file"), async (req, res) => {
                         .json({ message: "Error writing file to GridFS", error });
                 });
                 uploadStream.on("finish", async () => {
-                    const imageUrl = `https://invoiceapp-46lb.onrender.com/images/${randomFilename}`;
+                    const imageUrl = `https://invoice-app-3qvk.onrender.com/images/${randomFilename}`;
                     const image = new schema_1.ImageModel({
                         filename: randomFilename,
                         contentType: file.mimetype,
@@ -256,6 +256,8 @@ accountAPI.post("/signup", async (req, res) => {
             owner: newUser._id,
         });
         await project.save();
+        newUser.projects.push(project._id);
+        await newUser.save();
         const projects = await schema_1.Project.find({ _id: { $in: newUser.projects } })
             .populate({
             path: "invoices",
@@ -265,8 +267,6 @@ accountAPI.post("/signup", async (req, res) => {
         if (!projects) {
             return res.status(500).json({ error: "no projects found" });
         }
-        newUser.projects.push(project._id);
-        await newUser.save();
         const token = jsonwebtoken_1.default.sign({
             user: {
                 _id: newUser._id,

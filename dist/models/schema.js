@@ -30,6 +30,7 @@ var Status;
     Status[Status["paid"] = 0] = "paid";
     Status[Status["draft"] = 1] = "draft";
     Status[Status["pending"] = 2] = "pending";
+    Status[Status["overDue"] = 3] = "overDue";
 })(Status || (exports.Status = Status = {}));
 var Filter;
 (function (Filter) {

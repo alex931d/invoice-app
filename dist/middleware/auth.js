@@ -4,11 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const secretKey = "1a3f7d9e2c5h8k0o3w6s9v2b4x7z1q3u5t8m0l2n";
+const secretKey = process.env.SECRET_KEY;
 function verifyToken(req, res, next) {
     const token = req.cookies.jwt;
     if (!token) {
         return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+    if (!secretKey) {
+        return res.status(401).json({ success: false, message: "no secretKey" });
     }
     jsonwebtoken_1.default.verify(token, secretKey, (err, decoded) => {
         if (err) {

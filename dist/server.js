@@ -25,19 +25,44 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json({ limit: "10mb" }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
-    origin: "https://invoiceappfrontend.onrender.com",
+    origin: "https://invoice-app-3qvk.onrender.com",
     credentials: true,
 }));
 app.use((0, helmet_1.default)());
-app.use(helmet_1.default.crossOriginEmbedderPolicy({ policy: "require-corp" }));
-app.use(helmet_1.default.crossOriginOpenerPolicy({ policy: "same-origin" }));
-app.use((req, res, next) => {
-    res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
-    next();
-});
-app.use((0, helmet_1.default)({
-    referrerPolicy: {
-        policy: "strict-origin-when-cross-origin",
+app.use(helmet_1.default.contentSecurityPolicy({
+    directives: {
+        defaultSrc: [
+            "'self'",
+            "'unsafe-inline'",
+            "'unsafe-eval'",
+            "https://invoice-app-3qvk.onrender.com",
+            "http://localhost:3000",
+            "https://localhost:3000",
+        ],
+        scriptSrc: [
+            "'self'",
+            "'unsafe-inline'",
+            "'unsafe-eval'",
+            "https://invoice-app-3qvk.onrender.com",
+            "http://localhost:3000",
+            "https://localhost:3000",
+        ],
+        styleSrc: [
+            "'self'",
+            "'unsafe-inline'",
+            "https://fonts.googleapis.com",
+            "https://invoice-app-3qvk.onrender.com",
+            "http://localhost:3000",
+            "https://localhost:3000",
+        ],
+        imgSrc: [
+            "'self'",
+            "data:",
+            "https://invoice-app-3qvk.onrender.com",
+            "http://localhost:3000",
+            "https://localhost:3000",
+            "blob:",
+        ],
     },
 }));
 app.use(body_parser_1.default.json());
